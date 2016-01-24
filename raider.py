@@ -62,13 +62,15 @@ class Raider(object):
     def left(self):
         robot.home(-140, 30)
 
-        a_offset=30
-        period = 300
-        amplitude = [30, 30]
-        offset = [0, 0]
-        phase = [0, 180]
 
-        for i in range(2):
+        a_offset=30
+        h_offset=-140
+        period = 400
+        amplitude = [30, 10, 20]
+        offset = [0, 0, 0]
+        phase = [0, 180, 180]
+
+        for i in range(3):
             self.osc[i].period = period
             self.osc[i].amplitude = amplitude[i]
             self.osc[i].phase = phase[i]
@@ -77,18 +79,27 @@ class Raider(object):
         init_ref = time.time()
         self.osc[0].ref_time = init_ref
         self.osc[1].ref_time = init_ref
+        self.osc[2].ref_time = init_ref
 
         while 1:
-            for i in range(2):
+            for i in range(3):
                 self.osc[i].refresh()
 
             self.move(15, 512-a_offset+self.osc[0].output)
             self.move(16, 512+a_offset+self.osc[1].output)
             self.move(23, 512+a_offset+self.osc[1].output)
-            self.move(24, 512-a_offset+self.osc[1].output)
+            self.move(24, 512-a_offset)
+
+            self.move(17, 512-h_offset-self.osc[2].output)
+            self.move(19, 512+h_offset+self.osc[2].output)
+            self.move(21, 512+h_offset-18+self.osc[2].output)
+            time.sleep(0.01)
+
 
 
 
 trims=[0,0,0,0,0,0,0,0,0,0,0,0,0,3,-2,-5,5,0,0,-5,0,0,0,0,0]
 robot = Raider(trims)
+robot.home(-140, 30)
+time.sleep(0.01)
 robot.left()
