@@ -103,9 +103,9 @@ class Raider(object):
         a_offset=30
         h_offset=-120
         period = 300
-        amplitude = [30, 30, 40, 10, 10]
+        amplitude = [30, 30, 40, 18, 18]
         offset = [0, 0, 0, 0, 0]
-        phase = [0, 180, 270, 90, 270]
+        phase = [0, 180, 180, 90, 270]
 
         for i in range(5):
             self.osc[i].period = period
