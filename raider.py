@@ -65,7 +65,7 @@ class Raider(object):
 
         a_offset=30
         h_offset=-140
-        period = 400
+        period = 250
         amplitude = [30, 10, 20]
         offset = [0, 0, 0]
         phase = [0, 180, 180]
