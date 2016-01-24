@@ -16,11 +16,17 @@ class Raider(object):
         self._name = name
         self._trim = trim
         self.dxl = dynamixel.Dynamixel()
+        self.joint_position=np.full(25, 512)
+
+        self.osc = []
+        for i in range(25):
+            self.osc.append(octosnake.Oscillator())
 
     def move(self, id, position):
         self.dxl.com.write(self.dxl._coder(1, id, 30, int(position+self._trim[id])))
         if id == 17 or id == 18:
             self.dxl.com.write(self.dxl._coder(1, id+100, 30, int(position)+self._trim[id]))
+        self.joint_position[id] = position
 
     def zero(self):
         for i in range(0,11):
@@ -53,32 +59,36 @@ class Raider(object):
         self.move(24, 512-a)
 
 
-    def fake(self, steps, T=750.0):
+    def left(self):
+        robot.home(-140, 30)
 
-        x_amp = 20
-        z_amp = 15
-        front_x = 8
-        i = 0
+        a_offset=30
+        period = 300
+        amplitude = [30, 30]
+        offset = [0, 0]
+        phase = [0, 180]
 
-        T = 500
-        amplitude = 100
-        offset = 612
-        phase = 0
-
-        osc = octosnake.Oscillator()
-
-        osc.period = T
-        osc.amplitude = amplitude
-        osc.phase = phase
-        osc.offset = offset
+        for i in range(2):
+            self.osc[i].period = period
+            self.osc[i].amplitude = amplitude[i]
+            self.osc[i].phase = phase[i]
+            self.osc[i].offset = offset[i]
 
         init_ref = time.time()
-        final = init_ref + float(T*steps/1000)
-        while time.time() < final:
-            osc.refresh()
-            self.dxl.setPosition(6,int(osc.output))
-            self.dxl.setPosition(4,int(osc.output))
+        self.osc[0].ref_time = init_ref
+        self.osc[1].ref_time = init_ref
+
+        while 1:
+            for i in range(2):
+                self.osc[i].refresh()
+
+            self.move(15, 512-a_offset+self.osc[0].output)
+            self.move(16, 512+a_offset+self.osc[1].output)
+            self.move(23, 512+a_offset+self.osc[1].output)
+            self.move(24, 512-a_offset+self.osc[1].output)
+
+
 
 trims=[0,0,0,0,0,0,0,0,0,0,0,0,0,3,-2,-5,5,0,0,-5,0,0,0,0,0]
 robot = Raider(trims)
-robot.home(-140, 30)
+robot.left()
