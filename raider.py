@@ -96,19 +96,19 @@ class Raider(object):
             time.sleep(0.01)
 
     def turn(self):
-        robot.home(-140, 20)
+        robot.home(-140, 10)
         self.move(23, 512+10)
         self.move(24, 512-10)
 
         a_offset=30
-        h_offset=-140
-        period = [400, 400, 400]
-        amplitude = [30, 30, 40]
-        offset = [0, 0, 0]
-        phase = [0, 180, 180]
+        h_offset=-120
+        period = 300
+        amplitude = [30, 30, 40, 10, 10]
+        offset = [0, 0, 0, 0, 0]
+        phase = [0, 180, 270, 90, 270]
 
-        for i in range(3):
-            self.osc[i].period = period[i]
+        for i in range(5):
+            self.osc[i].period = period
             self.osc[i].amplitude = amplitude[i]
             self.osc[i].phase = phase[i]
             self.osc[i].offset = offset[i]
@@ -117,23 +117,31 @@ class Raider(object):
         self.osc[0].ref_time = init_ref
         self.osc[1].ref_time = init_ref
         self.osc[2].ref_time = init_ref
+        self.osc[3].ref_time = init_ref
+        self.osc[4].ref_time = init_ref
 
         while 1:
-            for i in range(3):
+            for i in range(5):
                 self.osc[i].refresh()
             self.move(13, 512+self.osc[0].output)
             self.move(14, 512+self.osc[1].output)
             self.move(2, 512+self.osc[2].output)
+            self.move(17, 512-h_offset-self.osc[3].output)
+            self.move(19, 512+h_offset+self.osc[3].output)
+            self.move(21, 512+h_offset-18+self.osc[3].output)
+            self.move(18, 512+h_offset+self.osc[4].output)
+            self.move(20, 512-h_offset-self.osc[4].output)
+            self.move(22, 512-h_offset+18-self.osc[4].output)
 
 
             time.sleep(0.01)
 
 
 
+if __name__ == "__main__":
 
-
-trims=[0,0,0,0,0,0,0,0,0,0,0,0,0,3,-2,-5,5,0,0,-5,0,0,0,0,0]
-robot = Raider(trims)
-robot.home(-140, 30)
-time.sleep(0.01)
-robot.turn()
+    trims=[0,0,0,0,0,0,0,0,0,0,0,0,0,3,-2,-5,5,0,0,-5,0,0,0,0,0]
+    robot = Raider(trims)
+    robot.home(-140, 30)
+    time.sleep(0.01)
+    robot.turn()
