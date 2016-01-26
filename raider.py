@@ -95,7 +95,7 @@ class Raider(object):
 
             self.move(17, 512-h_offset-self.osc[2].output)
             self.move(19, 512+h_offset+self.osc[2].output)
-            self.move(21, 512+h_offset-18+self.osc[2].output)
+            self.move(21, 512+h_offset-20+self.osc[2].output)
             time.sleep(0.01)
 
     def stepR(self, steps):
@@ -107,7 +107,7 @@ class Raider(object):
         period = 250
         amplitude = [10, 30, 20]
         offset = [0, 0, 0]
-        phase = [180, 0, 0]
+        phase = [0, 180, 180]
 
         for i in range(3):
             self.osc[i].period = period
@@ -132,20 +132,20 @@ class Raider(object):
 
             self.move(18, 512+h_offset+self.osc[2].output)
             self.move(20, 512-h_offset-self.osc[2].output)
-            self.move(22, 512-h_offset+18-self.osc[2].output)
+            self.move(22, 512-h_offset+20-self.osc[2].output)
             time.sleep(0.01)
 
     def turnL(self, steps):
         self.home(-140, 10)
         self.move(23, 512+10)
-        self.move(24, 512-10)
+        self.move(24, 512+10)
 
         a_offset = 30
         h_offset = -120
         period = 300
-        amplitude = [30, 30, 30, 10, 10]
+        amplitude = [25, 25, 30, 10, 10]
         offset = [0, 0, 0, 0, 0]
-        phase = [0, 180, 90, 270, 90]
+        phase = [90, 270, 180, 0, 180]
 
         for i in range(5):
             self.osc[i].period = period
@@ -181,10 +181,9 @@ class Raider(object):
 
 if __name__ == "__main__":
 
-    trims=[0,0,0,0,0,0,0,0,0,0,0,0,0,3,-2,-5,5,0,0,-5,0,0,0,0,0]
+    trims=[0,0,0,0,0,0,0,0,0,0,0,0,0,3,-2,-5,5,0,0,-5,0,-6,0,0,0]
     robot = Raider(trims)
+    #robot.zero()
+
     robot.home(-140, 30)
-    time.sleep(0.1)
-    robot.left(1)
-    #robot.home(-140, 30)
-    #time.sleep(0.01)
+    time.sleep(0.01)
