@@ -41,7 +41,7 @@ while True:
 
     elif bumperL == 1:
         print 'step left'
-        # robot.stepL()
+        robot.stepL(1)
 
     elif bumperR == 1:
         print 'step right'
@@ -79,6 +79,6 @@ while True:
         print 'turnL'
         # robot.turnL()
     else:
-        # robot.home()
+        robot.home(-140, 30)
         pass
     clock.tick(5000)

@@ -16,7 +16,7 @@ class Raider(object):
         self._name = name
         self._trim = trim
         self.dxl = dynamixel.Dynamixel()
-        self.joint_position=np.full(25, 512)
+        self.joint_position = np.full(25, 512)
 
         self.osc = []
         for i in range(25):
@@ -29,8 +29,10 @@ class Raider(object):
         self.joint_position[id] = position
 
     def zero(self):
+
         for i in range(0,11):
             self.move(i, 512)
+
         for i in range(13,25):
             self.move(i, 512)
 
@@ -39,11 +41,11 @@ class Raider(object):
         self.move(2, 512)
         self.move(3, 512)
         self.move(4, 512)
-        #self.move(5, 262)
+        # self.move(5, 262)
         self.move(6, 762)
-        #self.move(7, 462)
+        # self.move(7, 462)
         self.move(8, 562)
-        #self.move(9, 62)
+        # self.move(9, 62)
         self.move(10, 952)
         self.move(13, 512)
         self.move(14, 512)
@@ -59,12 +61,12 @@ class Raider(object):
         self.move(24, 512-a)
 
 
-    def left(self):
-        robot.home(-140, 30)
+    def stepL(self, steps):
+        self.home(-140, 30)
 
 
-        a_offset=30
-        h_offset=-140
+        a_offset = 30
+        h_offset = -140
         period = 250
         amplitude = [30, 10, 20]
         offset = [0, 0, 0]
@@ -77,11 +79,12 @@ class Raider(object):
             self.osc[i].offset = offset[i]
 
         init_ref = time.time()
+        final = init_ref + float(period*steps)/1000
         self.osc[0].ref_time = init_ref
         self.osc[1].ref_time = init_ref
         self.osc[2].ref_time = init_ref
 
-        while 1:
+        while time.time() < final:
             for i in range(3):
                 self.osc[i].refresh()
 
@@ -100,8 +103,8 @@ class Raider(object):
         self.move(23, 512+10)
         self.move(24, 512-10)
 
-        a_offset=30
-        h_offset=-120
+        a_offset = 30
+        h_offset = -120
         period = 1500
         amplitude = [30, 30, 40, 18, 18]
         offset = [0, 0, 0, 0, 0]
@@ -143,5 +146,7 @@ if __name__ == "__main__":
     trims=[0,0,0,0,0,0,0,0,0,0,0,0,0,3,-2,-5,5,0,0,-5,0,0,0,0,0]
     robot = Raider(trims)
     robot.home(-140, 30)
-    time.sleep(0.01)
-    robot.turn()
+    time.sleep(0.1)
+    robot.left(1)
+    #robot.home(-140, 30)
+    #time.sleep(0.01)
