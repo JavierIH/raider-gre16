@@ -23,35 +23,17 @@ while True:
     # axisRY = joystick.get_axis(3)
     # triggerR = joystick.get_axis(4)
     # triggerL = joystick.get_axis(5)
-    buttonA = joystick.get_button(0)
+    # buttonY = joystick.get_button(0)
     buttonB = joystick.get_button(1)
-    buttonX = joystick.get_button(2)
-    # buttonY = joystick.get_button(3)
+    buttonA = joystick.get_button(2)
+    buttonX = joystick.get_button(3)
     bumperL = joystick.get_button(4)
     bumperR = joystick.get_button(5)
     back = joystick.get_button(6)
     start = joystick.get_button(7)
     pad = joystick.get_hat(0)
 
-
-
-    if start == 1:
-        print 'get up'
-        # robot.getUp()
-
-    elif bumperL == 1:
-        print 'step left'
-        robot.stepL(1)
-
-    elif bumperR == 1:
-        print 'step right'
-        # robot.stepR()
-
-    elif back == 1:
-        print 'back get up'
-        # robot.backGetUp()
-
-    elif buttonX == 1:
+    if buttonX == 1:
         print 'left punch'
         # robot.punchL()
 
@@ -63,6 +45,23 @@ while True:
         print 'right punch'
         # robot.punchR()
 
+    elif bumperL == 1:
+        print 'setpL'
+        robot.stepL(1)
+
+    elif bumperR == 1:
+        print 'stepR'
+        robot.stepR(1)
+
+
+    elif pad[0] == 1:
+        print 'turnR'
+        # robot.turnR()
+
+    elif pad[0] == -1:
+        print 'turnL'
+        robot.turnL(1)
+
     elif pad[1] == 1:
         print 'walk'
         # robot.walkF()
@@ -71,13 +70,14 @@ while True:
         print 'back'
         # robot.walkB()
 
-    elif pad[0] == 1:
-        print 'turnR'
-        # robot.turnR()
+    elif start == 1:
+        print 'get up'
+        # robot.getUp()
 
-    elif pad[0] == -1:
-        print 'turnL'
-        # robot.turnL()
+    elif back == 1:
+        print 'back get up'
+        # robot.backGetUp()
+
     else:
         robot.home(-140, 30)
         pass

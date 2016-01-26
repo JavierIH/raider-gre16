@@ -98,14 +98,51 @@ class Raider(object):
             self.move(21, 512+h_offset-18+self.osc[2].output)
             time.sleep(0.01)
 
-    def turn(self):
-        robot.home(-140, 10)
+    def stepR(self, steps):
+        self.home(-140, 30)
+
+
+        a_offset = 30
+        h_offset = -140
+        period = 250
+        amplitude = [10, 30, 20]
+        offset = [0, 0, 0]
+        phase = [180, 0, 0]
+
+        for i in range(3):
+            self.osc[i].period = period
+            self.osc[i].amplitude = amplitude[i]
+            self.osc[i].phase = phase[i]
+            self.osc[i].offset = offset[i]
+
+        init_ref = time.time()
+        final = init_ref + float(period*steps)/1000
+        self.osc[0].ref_time = init_ref
+        self.osc[1].ref_time = init_ref
+        self.osc[2].ref_time = init_ref
+
+        while time.time() < final:
+            for i in range(3):
+                self.osc[i].refresh()
+
+            self.move(15, 512-a_offset+self.osc[0].output)
+            self.move(16, 512+a_offset+self.osc[1].output)
+            self.move(23, 512+a_offset)
+            self.move(24, 512-a_offset+self.osc[0].output)
+
+            self.move(18, 512+h_offset+self.osc[2].output)
+            self.move(20, 512-h_offset-self.osc[2].output)
+            self.move(22, 512-h_offset+18-self.osc[2].output)
+            time.sleep(0.01)
+
+    def turnL(self, steps):
+        self.home(-140, 10)
         self.move(23, 512+10)
         self.move(24, 512-10)
 
         a_offset = 30
         h_offset = -120
-        period = 1500
+        period = 400
         amplitude = [30, 30, 40, 18, 18]
         offset = [0, 0, 0, 0, 0]
         phase = [0, 180, 180, 90, 270]
@@ -117,13 +154,14 @@ class Raider(object):
             self.osc[i].offset = offset[i]
 
         init_ref = time.time()
+        final = init_ref + float(period*steps)/1000
         self.osc[0].ref_time = init_ref
         self.osc[1].ref_time = init_ref
         self.osc[2].ref_time = init_ref
         self.osc[3].ref_time = init_ref
         self.osc[4].ref_time = init_ref
 
-        while 1:
+        while time.time() < final:
             for i in range(5):
                 self.osc[i].refresh()
             self.move(13, 512+self.osc[0].output)
