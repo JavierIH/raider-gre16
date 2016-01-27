@@ -176,8 +176,8 @@ class Raider(object):
 
     def turnR(self, steps):
         self.home(-140, 10)
-        self.move(23, 512-10)
-        self.move(24, 512-10)
+
+        self.move(15, 512-30)
 
         h_offset = -120
         period = 300
@@ -206,10 +206,10 @@ class Raider(object):
             self.move(14, 512+self.osc[1].output)
             self.move(2, 512+self.osc[2].output)
             self.move(17, 512-h_offset-self.osc[3].output)
-            self.move(19, 512+h_offset+self.osc[3].output)
+            self.move(19, 512+h_offset+10+self.osc[3].output)
             self.move(21, 512+h_offset-18+self.osc[3].output)
             self.move(18, 512+h_offset+self.osc[4].output)
-            self.move(20, 512-h_offset-self.osc[4].output)
+            self.move(20, 512-h_offset-10-self.osc[4].output)
             self.move(22, 512-h_offset+18-self.osc[4].output)
             time.sleep(0.01)
 
@@ -229,8 +229,8 @@ class Raider(object):
         self.move(18, 512+h_L)
         self.move(19, 512+h_R)
         self.move(20, 512-h_L)
-        self.move(21, 512+h_R-18)
-        self.move(22, 512-h_L+18)
+        self.move(21, 512+h_R-35)
+        self.move(22, 512-h_L+35)
         self.move(23, 512+100)
         self.move(24, 512-25)#-a_R)
 
@@ -243,7 +243,7 @@ class Raider(object):
 
         self.move(4, 512)
         self.move(6, 512)
-        self.move(8, 200)
+        self.move(8, 190)
         self.move(10, 562)
 
         a_R=50
@@ -255,8 +255,8 @@ class Raider(object):
         self.move(16, 512+a_L)
         self.move(17, 512-h_R)
         self.move(18, 512+h_L)
-        self.move(19, 512+h_R)
-        self.move(20, 512-h_L)
+        self.move(19, 512+14+h_R)
+        self.move(20, 512-14-h_L)
         self.move(21, 512+h_R-18)
         self.move(22, 512-h_L+18)
         self.move(23, 512+100)
