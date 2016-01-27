@@ -34,8 +34,7 @@ while True:
     pad = joystick.get_hat(0)
 
     if buttonX == 1:
-        print 'left punch'
-        # robot.punchL()
+        robot.punchL()
 
     elif buttonA == 1:
         print 'front punch'
@@ -55,12 +54,13 @@ while True:
 
 
     elif pad[0] == 1:
-        print 'turnR'
-        # robot.turnR()
-
-    elif pad[0] == -1:
         print 'turnL'
         robot.turnL(1)
+
+
+    elif pad[0] == -1:
+        print 'turnR'
+        robot.turnR(1)
 
     elif pad[1] == 1:
         print 'walk'
