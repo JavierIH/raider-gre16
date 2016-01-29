@@ -39,13 +39,13 @@ class Raider(object):
     def home(self, h=0, a=0):
         self.move(1, 512)
         self.move(2, 512)
-        self.move(3, 512)
+        #self.move(3, 512)
         self.move(4, 512)
-        # self.move(5, 262)
+        #self.move(5, 262)
         self.move(6, 762)
-        # self.move(7, 462)
+        #self.move(7, 462)
         self.move(8, 562)
-        # self.move(9, 62)
+        #self.move(9, 62)
         self.move(10, 952)
         self.move(13, 512)
         self.move(14, 512)
@@ -135,10 +135,9 @@ class Raider(object):
             self.move(22, 512-h_offset+20-self.osc[2].output)
             time.sleep(0.01)
 
-    def turnL(self, steps):
+    def turnR(self, steps):
         self.home(-140, 10)
-        self.move(23, 512+10)
-        self.move(24, 512+10)
+        self.move(16, 512+30)
 
         h_offset = -120
         period = 300
@@ -174,7 +173,7 @@ class Raider(object):
             self.move(22, 512-h_offset+18-self.osc[4].output)
             time.sleep(0.01)
 
-    def turnR(self, steps):
+    def turnL(self, steps):
         self.home(-140, 10)
 
         self.move(15, 512-30)
@@ -218,10 +217,10 @@ class Raider(object):
         self.home(-140, 30)
         time.sleep(0.1)
 
-        a_R=70
-        a_L=60
-        h_R=-70
-        h_L=-160
+        a_R = 70
+        a_L = 60
+        h_R = -70
+        h_L = -160
 
         self.move(15, 512-a_R)
         self.move(16, 512+a_L)
@@ -246,10 +245,10 @@ class Raider(object):
         self.move(8, 190)
         self.move(10, 562)
 
-        a_R=50
-        a_L=70
-        h_R=-140
-        h_L=-140
+        a_R = 50
+        a_L = 70
+        h_R = -140
+        h_L = -140
 
         self.move(15, 512-a_R)
         self.move(16, 512+a_L)
@@ -266,12 +265,105 @@ class Raider(object):
 
 
 
+    def punchR(self):
+        self.home(-140, 30)
+        time.sleep(0.1)
+
+        a_R = 60
+        a_L = 70
+        h_R = -160
+        h_L = -70
+
+        self.move(15, 512-a_R)
+        self.move(16, 512+a_L)
+        self.move(17, 512-h_R)
+        self.move(18, 512+h_L)
+        self.move(19, 512+h_R)
+        self.move(20, 512-h_L)
+        self.move(21, 512+h_R-35)
+        self.move(22, 512-h_L+35)
+        self.move(23, 512+25)
+        self.move(24, 512-100)#-a_R)
+
+        self.move(3, 512)
+        self.move(5, 362)
+        self.move(7, 824)
+        self.move(9, 612)
+
+        time.sleep(0.25)
+
+        self.move(3, 512)
+        self.move(5, 512)
+        self.move(7, 834)
+        self.move(9, 462)
+
+        a_R = 70
+        a_L = 50
+        h_R = -140
+        h_L = -140
+
+        self.move(15, 512-a_R)
+        self.move(16, 512+a_L)
+        self.move(17, 512-h_R)
+        self.move(18, 512+h_L)
+        self.move(19, 512+14+h_R)
+        self.move(20, 512-14-h_L)
+        self.move(21, 512+h_R-18)
+        self.move(22, 512-h_L+18)
+        self.move(23, 512+a_L)
+        self.move(24, 512-100)
+
+        time.sleep(0.5)
+
+
+    def getUp(self):
+        self.home(-200, 0)
+        time.sleep(0.5)
+        self.move(17, 812)
+        self.move(18, 212)
+        time.sleep(0.1)
+
+        self.move(4, 362)
+        self.move(6, 812)
+        self.move(8, 512)
+        self.move(10, 412)
+        self.move(3, 662)
+        self.move(5, 212)
+        self.move(7, 512)
+        self.move(9, 612)
+        time.sleep(0.3)
+
+        self.move(4, 362)
+        self.move(6, 812)
+        self.move(8, 512)
+        self.move(10, 412)
+        self.move(3, 662)
+        self.move(5, 212)
+        self.move(7, 512)
+        self.move(9, 612)
+        time.sleep(0.3)
+
+        self.move(4, 362)
+        self.move(6, 812)
+        self.move(8, 512)
+        self.move(10, 412)
+        self.move(3, 622)
+        self.move(5, 212)
+        self.move(7, 512)
+        self.move(9, 612)
+        time.sleep(0.5)
+
+        self.move(2, 612)
+        time.sleep(1)
+        robot.home(-140, 30)
+
+
+
 if __name__ == "__main__":
 
     trims=[0,0,0,0,0,0,0,0,0,0,0,0,0,3,-2,-5,5,0,0,-5,0,-6,0,0,0]
     robot = Raider(trims)
     #robot.zero()
 
-    robot.punchL()
-    robot.punchL()
+    #robot.getUp()
     time.sleep(0.01)

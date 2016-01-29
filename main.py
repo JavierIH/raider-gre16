@@ -21,16 +21,16 @@ while True:
     # axisLY = joystick.get_axis(1)
     # axisRX = joystick.get_axis(2)
     # axisRY = joystick.get_axis(3)
-    # triggerR = joystick.get_axis(4)
-    # triggerL = joystick.get_axis(5)
+    back = joystick.get_button(8)
+    start = joystick.get_button(9)
     # buttonY = joystick.get_button(0)
     buttonB = joystick.get_button(1)
     buttonA = joystick.get_button(2)
     buttonX = joystick.get_button(3)
     bumperL = joystick.get_button(4)
     bumperR = joystick.get_button(5)
-    back = joystick.get_button(6)
-    start = joystick.get_button(7)
+    #triggerL = joystick.get_button(6)
+    #triggerR = joystick.get_button(7)
     pad = joystick.get_hat(0)
 
     if buttonX == 1:
@@ -42,7 +42,7 @@ while True:
 
     elif buttonB == 1:
         print 'right punch'
-        # robot.punchR()
+        robot.punchR()
 
     elif bumperL == 1:
         print 'setpL'
@@ -54,13 +54,13 @@ while True:
 
 
     elif pad[0] == 1:
-        print 'turnL'
-        robot.turnL(1)
+        print 'turnR'
+        robot.turnR(1)
 
 
     elif pad[0] == -1:
-        print 'turnR'
-        robot.turnR(1)
+        print 'turnL'
+        robot.turnL(1)
 
     elif pad[1] == 1:
         print 'walk'
@@ -72,7 +72,7 @@ while True:
 
     elif start == 1:
         print 'get up'
-        # robot.getUp()
+        #robot.getUp()
 
     elif back == 1:
         print 'back get up'
