@@ -76,7 +76,7 @@ while True:
 
     elif back == 1:
         print 'back get up'
-        # robot.backGetUp()
+        robot.backGetUp()
 
     else:
         robot.home(-140, 30)

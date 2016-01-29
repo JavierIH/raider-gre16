@@ -39,13 +39,13 @@ class Raider(object):
     def home(self, h=0, a=0):
         self.move(1, 512)
         self.move(2, 512)
-        #self.move(3, 512)
+        self.move(3, 512)
         self.move(4, 512)
-        #self.move(5, 262)
+        self.move(5, 262)
         self.move(6, 762)
-        #self.move(7, 462)
+        self.move(7, 462)
         self.move(8, 562)
-        #self.move(9, 62)
+        self.move(9, 62)
         self.move(10, 952)
         self.move(13, 512)
         self.move(14, 512)
@@ -358,6 +358,56 @@ class Raider(object):
         robot.home(-140, 30)
 
 
+    def backGetUp(self):
+        self.home(-200, 0)
+        time.sleep(0.5)
+        self.move(17, 812)
+        self.move(18, 212)
+        self.move(15, 512-100)
+        self.move(16, 512+100)
+        time.sleep(0.5)
+
+        self.move(4, 1023)
+        self.move(8, 512)
+        self.move(3, 1)
+        self.move(7, 512)
+        time.sleep(0.5)
+
+        self.move(6, 812)
+        self.move(10, 812)
+        self.move(5, 212)
+        self.move(9, 212)
+        time.sleep(0.5)
+
+        self.move(4, 812)
+        self.move(10, 512)
+        self.move(3, 212)
+        self.move(9, 512)
+        time.sleep(0.5)
+
+        self.move(3, 392)
+        self.move(4, 632)
+
+        self.move(9, 612)
+        self.move(10, 412)
+        time.sleep(0.5)
+
+
+        self.move(2, 712)
+        self.move(5, 312)
+        self.move(6, 812)
+
+
+
+
+        time.sleep(1000)
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
 
@@ -365,5 +415,5 @@ if __name__ == "__main__":
     robot = Raider(trims)
     #robot.zero()
 
-    #robot.getUp()
+    robot.backGetUp()
     time.sleep(0.01)
