@@ -396,9 +396,11 @@ class Raider(object):
         self.move(2, 712)
         self.move(5, 312)
         self.move(6, 812)
+        time.sleep(0.5)
 
-
-
+        self.move(5, 512)
+        self.move(6, 512)
+        self.move(2, 512)
 
         time.sleep(1000)
 
