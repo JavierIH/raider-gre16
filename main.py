@@ -34,6 +34,7 @@ while True:
     pad = joystick.get_hat(0)
 
     if buttonX == 1:
+        print 'ue'
         robot.punchL()
 
     elif buttonA == 1:
@@ -72,7 +73,7 @@ while True:
 
     elif start == 1:
         print 'get up'
-        #robot.getUp()
+        robot.getUp()
 
     elif back == 1:
         print 'back get up'

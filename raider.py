@@ -354,8 +354,8 @@ class Raider(object):
         time.sleep(0.5)
 
         self.move(2, 612)
-        time.sleep(1)
-        robot.home(-140, 30)
+        time.sleep(2)
+        self.home(-140, 30)
 
 
     def backGetUp(self):
@@ -393,17 +393,14 @@ class Raider(object):
         time.sleep(0.5)
 
 
-        self.move(2, 712)
+        self.move(2, 732)
         self.move(5, 312)
         self.move(6, 812)
-        time.sleep(0.5)
+        time.sleep(0.7)
 
         self.move(5, 512)
         self.move(6, 512)
         self.move(2, 512)
-
-        time.sleep(1000)
-
 
 
 
